@@ -10,6 +10,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prismadb from "@/libs/prismadb";
 
 export default NextAuth({
+  adapter: PrismaAdapter(prismadb),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -59,10 +60,10 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signIn: "/auth",
+    signIn: "/",
   },
   debug: process.env.NODE_ENV === "development",
-  adapter: PrismaAdapter(prismadb),
+  // adapter: PrismaAdapter(prismadb),
   session: {
     strategy: "jwt",
   },
