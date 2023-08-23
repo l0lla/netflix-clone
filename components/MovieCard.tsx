@@ -35,7 +35,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
       <div
         className="
         opacity-0
-        absolute
+        relative
+        (absolute)
         top-0
         transition
         duration-200
@@ -46,7 +47,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         w-full
         scale-0
         group-hover:scale-110
-        group-hover:-translate-y-[6vw]
+        group-hover:-translate-y-[9vw]
         group-hover:translate-x-[2vw]
         group-hover:opacity-100"
       >
