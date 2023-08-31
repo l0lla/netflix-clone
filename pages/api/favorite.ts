@@ -3,6 +3,8 @@ import { without } from "lodash";
 
 import prismadb from "@/libs/prismadb";
 import serverAuth from "@/libs/serverAuth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +12,10 @@ export default async function handler(
 ) {
   try {
     if (req.method === "POST") {
-      const { currentUser } = await serverAuth(req);
+      const session = await getServerSession(req, res, authOptions);
+      const currentUser = session?.user;
+
+      if (!currentUser) throw new Error("No user");
 
       const { movieId } = req.body;
 
@@ -39,7 +44,7 @@ export default async function handler(
     }
 
     if (req.method === "DELETE") {
-      const { currentUser } = await serverAuth(req);
+      const { currentUser } = await serverAuth(req, res);
 
       const { movieId } = req.body;
 

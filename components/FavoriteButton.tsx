@@ -5,11 +5,16 @@ import { AiOutlineCheck, AiOutlinePlus } from "react-icons/ai";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorites from "@/hooks/useFavorites";
 
+import { NextApiRequest } from "next";
+
 interface FavoriteButtonProps {
   movieId: string;
 }
 
-const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
+const FavoriteButton: React.FC<FavoriteButtonProps> = (
+  { movieId },
+  req: NextApiRequest
+) => {
   const { mutate: mutateFavorites } = useFavorites();
   const { data: currentUser, mutate } = useCurrentUser();
 
